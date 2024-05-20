@@ -10,20 +10,21 @@ private:
     int quality = 0; // Качество дороги (от 1 до 10)
 
 public:
-    // Конструктор с параметрами
-    Road(std::size_t length, std::size_t lanes, int quality) : length(length), lanes(lanes), quality(quality) {}
-
     // Конструктор по умолчанию
     Road() = default;
+
+    // Конструктор с параметрами (с использованием списков инициализации)
+    Road(std::size_t length, std::size_t lanes, int quality) : length(length), lanes(lanes), quality(quality) {}
 
     // Метод для чтения данных из файла
     void readDataFromFile(const std::string& fileName) {
         std::ifstream inputFile(fileName);
         if (!inputFile.is_open()) {
-            throw std::runtime_error("Файл не существует или не удалось открыть: " + fileName);
+            throw std::runtime_error("Не удалось открыть файл: " + fileName);
         }
 
-        if (!(inputFile >> length >> lanes >> quality)) {
+        inputFile >> length >> lanes >> quality;
+        if (inputFile.fail()) {
             throw std::runtime_error("Ошибка чтения данных из файла: " + fileName);
         }
     }
@@ -32,7 +33,7 @@ public:
     void writeDataToFile(const std::string& fileName) const {
         std::ofstream outputFile(fileName);
         if (!outputFile.is_open()) {
-            throw std::runtime_error("Не удалось открыть файл для записи: " + fileName);
+            throw std::runtime_error("Не удалось открыть файл: " + fileName);
         }
 
         outputFile << "Длина дороги: " << length << " метров\n"
@@ -46,26 +47,16 @@ public:
                   << "Количество полос: " << lanes << "\n"
                   << "Качество дороги: " << quality << "\n";
     }
-
-    // Метод для обновления данных о дороге
-    void updateData(std::size_t newLength, std::size_t newLanes, int newQuality) {
-        length = newLength;
-        lanes = newLanes;
-        quality = newQuality;
-    }
-
-    // Методы для получения значений длины, количества полос и качества дороги
-    std::size_t getLength() const { return length; }
-    std::size_t getLanes() const { return lanes; }
-    int getQuality() const { return quality; }
 };
 
 int main() {
     try {
-        // Создание объекта Road с заданными значениями
-        Road road(1000, 2, 8);
+        Road road;
 
-        // Вывод значений полей
+        // Чтение данных из файла
+        road.readDataFromFile("input.txt");
+
+        // Вывод данных на экран
         road.printValues();
 
         // Запись данных в файл
