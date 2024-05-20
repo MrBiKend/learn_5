@@ -9,6 +9,10 @@ private:
     std::size_t lanes; // Количество полос на дороге
 
 public:
+    // Конструктор с параметрами
+    Road(std::size_t length, std::size_t lanes) : length(length), lanes(lanes) {}
+
+    // Конструктор по умолчанию
     Road() : length(0), lanes(0) {}
 
     // Метод для чтения данных из файла
@@ -48,26 +52,16 @@ public:
 };
 
 int main() {
-    Road road;
-
     try {
-        // Чтение данных из файла
-        road.readDataFromFile("input.txt");
+        // Создание объекта Road с заданными значениями
+        Road road(1000, 2);
 
         // Вывод значений полей
         road.printValues();
 
-        // Обновление данных о дороге
-        std::size_t newLength, newLanes;
-        std::cout << "Введите новую длину дороги (в метрах): ";
-        std::cin >> newLength;
-        std::cout << "Введите новое количество полос: ";
-        std::cin >> newLanes;
-        road.updateData(newLength, newLanes);
-
-        // Запись обновленных данных в файл
+        // Запись данных в файл
         road.writeDataToFile("output.txt");
-        std::cout << "Обновленные данные успешно записаны в файл 'output.txt'." << std::endl;
+        std::cout << "Данные успешно записаны в файл 'output.txt'." << std::endl;
     } catch(const std::exception& e) {
         std::cerr << "Ошибка: " << e.what() << std::endl;
         return 1;
