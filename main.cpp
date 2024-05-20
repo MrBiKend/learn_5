@@ -58,6 +58,11 @@ public:
     std::size_t getLanes() const {
         return lanes;
     }
+
+    // Метод для проверки, является ли дорога шоссе
+    bool isHighway() const {
+        return lanes > 2;
+    }
 };
 
 int main() {
@@ -68,9 +73,12 @@ int main() {
         // Вывод значений полей
         road.printValues();
 
-        // Получение значений длины и количества полос
-        std::cout << "Длина дороги: " << road.getLength() << " метров" << std::endl;
-        std::cout << "Количество полос: " << road.getLanes() << std::endl;
+        // Проверка, является ли дорога шоссе
+        if (road.isHighway()) {
+            std::cout << "Дорога является шоссе." << std::endl;
+        } else {
+            std::cout << "Дорога не является шоссе." << std::endl;
+        }
 
         // Запись данных в файл
         road.writeDataToFile("output.txt");
