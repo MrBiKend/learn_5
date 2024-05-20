@@ -1,8 +1,3 @@
-```markdown
-<div align="center">
-  <img src="https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif" width="200" />
-</div>
-
 # 🛣️ RoadApp 🚗
 
 Простое приложение для работы с данными о дорогах.
