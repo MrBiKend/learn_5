@@ -52,6 +52,15 @@ public:
     bool isGoodRoad() const {
         return quality >= 7;
     }
+
+    // Метод для расчета примерного времени проезда по дороге
+    double calculateTravelTime(double averageSpeed) const {
+        if (lanes == 0) {
+            throw std::logic_error("Дорога без полос не имеет времени проезда.");
+        }
+        double timeInSeconds = length / (averageSpeed * lanes);
+        return timeInSeconds / 3600; // Переводим в часы
+    }
 };
 
 int main() {
@@ -70,6 +79,11 @@ int main() {
         } else {
             std::cout << "Это плохая дорога.\n";
         }
+
+        // Расчет времени проезда по дороге
+        double averageSpeed = 60; // Средняя скорость в км/ч
+        double travelTime = road.calculateTravelTime(averageSpeed);
+        std::cout << "Примерное время проезда по дороге: " << travelTime << " часа\n";
 
         // Запись данных в файл
         road.writeDataToFile("output.txt");
