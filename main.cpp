@@ -47,6 +47,11 @@ public:
                   << "Количество полос: " << lanes << "\n"
                   << "Качество дороги: " << quality << "\n";
     }
+
+    // Метод для определения, является ли дорога хорошей
+    bool isGoodRoad() const {
+        return quality >= 7;
+    }
 };
 
 int main() {
@@ -58,6 +63,13 @@ int main() {
 
         // Вывод данных на экран
         road.printValues();
+
+        // Проверка, является ли дорога хорошей
+        if (road.isGoodRoad()) {
+            std::cout << "Это хорошая дорога!\n";
+        } else {
+            std::cout << "Это плохая дорога.\n";
+        }
 
         // Запись данных в файл
         road.writeDataToFile("output.txt");
