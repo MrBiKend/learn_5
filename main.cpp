@@ -39,6 +39,12 @@ public:
         std::cout << "Длина дороги: " << length << " метров" << std::endl;
         std::cout << "Количество полос: " << lanes << std::endl;
     }
+
+    // Метод для обновления данных о дороге
+    void updateData(std::size_t newLength, std::size_t newLanes) {
+        length = newLength;
+        lanes = newLanes;
+    }
 };
 
 int main() {
@@ -51,9 +57,17 @@ int main() {
         // Вывод значений полей
         road.printValues();
 
-        // Запись данных в файл
+        // Обновление данных о дороге
+        std::size_t newLength, newLanes;
+        std::cout << "Введите новую длину дороги (в метрах): ";
+        std::cin >> newLength;
+        std::cout << "Введите новое количество полос: ";
+        std::cin >> newLanes;
+        road.updateData(newLength, newLanes);
+
+        // Запись обновленных данных в файл
         road.writeDataToFile("output.txt");
-        std::cout << "Данные успешно записаны в файл 'output.txt'." << std::endl;
+        std::cout << "Обновленные данные успешно записаны в файл 'output.txt'." << std::endl;
     } catch(const std::exception& e) {
         std::cerr << "Ошибка: " << e.what() << std::endl;
         return 1;
