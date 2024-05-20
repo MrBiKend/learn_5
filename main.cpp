@@ -7,13 +7,14 @@ class Road {
 private:
     std::size_t length; // Длина дороги в метрах
     std::size_t lanes; // Количество полос на дороге
+    int quality; // Качество дороги (от 1 до 10)
 
 public:
     // Конструктор с параметрами
-    Road(std::size_t length, std::size_t lanes) : length(length), lanes(lanes) {}
+    Road(std::size_t length, std::size_t lanes, int quality) : length(length), lanes(lanes), quality(quality) {}
 
     // Конструктор по умолчанию
-    Road() : length(0), lanes(0) {}
+    Road() : length(0), lanes(0), quality(0) {}
 
     // Метод для чтения данных из файла
     void readDataFromFile(const std::string& fileName) {
@@ -22,7 +23,7 @@ public:
             throw std::runtime_error("Файл не существует или не удалось открыть: " + fileName);
         }
 
-        if (!(inputFile >> length >> lanes)) {
+        if (!(inputFile >> length >> lanes >> quality)) {
             throw std::runtime_error("Ошибка чтения данных из файла: " + fileName);
         }
     }
@@ -36,21 +37,24 @@ public:
 
         outputFile << "Длина дороги: " << length << " метров\n";
         outputFile << "Количество полос: " << lanes << "\n";
+        outputFile << "Качество дороги: " << quality << "\n";
     }
 
     // Метод для вывода значений полей
     void printValues() const {
         std::cout << "Длина дороги: " << length << " метров" << std::endl;
         std::cout << "Количество полос: " << lanes << std::endl;
+        std::cout << "Качество дороги: " << quality << std::endl;
     }
 
     // Метод для обновления данных о дороге
-    void updateData(std::size_t newLength, std::size_t newLanes) {
+    void updateData(std::size_t newLength, std::size_t newLanes, int newQuality) {
         length = newLength;
         lanes = newLanes;
+        quality = newQuality;
     }
 
-    // Методы для получения значений длины и количества полос на дороге
+    // Методы для получения значений длины, количества полос и качества дороги
     std::size_t getLength() const {
         return length;
     }
@@ -59,26 +63,23 @@ public:
         return lanes;
     }
 
-    // Метод для проверки, является ли дорога шоссе
-    bool isHighway() const {
-        return lanes > 2;
+    int getQuality() const {
+        return quality;
     }
 };
 
 int main() {
     try {
         // Создание объекта Road с заданными значениями
-        Road road(1000, 2);
+        Road road(1000, 2, 8);
 
         // Вывод значений полей
         road.printValues();
 
-        // Проверка, является ли дорога шоссе
-        if (road.isHighway()) {
-            std::cout << "Дорога является шоссе." << std::endl;
-        } else {
-            std::cout << "Дорога не является шоссе." << std::endl;
-        }
+        // Получение значений длины, количества полос и качества дороги
+        std::cout << "Длина дороги: " << road.getLength() << " метров" << std::endl;
+        std::cout << "Количество полос: " << road.getLanes() << std::endl;
+        std::cout << "Качество дороги: " << road.getQuality() << std::endl;
 
         // Запись данных в файл
         road.writeDataToFile("output.txt");
