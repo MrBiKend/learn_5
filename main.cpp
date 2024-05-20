@@ -23,6 +23,17 @@ public:
         }
     }
 
+    // Метод для записи данных в файл
+    void writeDataToFile(const std::string& fileName) const {
+        std::ofstream outputFile(fileName);
+        if (!outputFile.is_open()) {
+            throw std::runtime_error("Не удалось открыть файл для записи: " + fileName);
+        }
+
+        outputFile << "Длина дороги: " << length << " метров\n";
+        outputFile << "Количество полос: " << lanes << "\n";
+    }
+
     // Метод для вывода значений полей
     void printValues() const {
         std::cout << "Длина дороги: " << length << " метров" << std::endl;
@@ -39,6 +50,10 @@ int main() {
 
         // Вывод значений полей
         road.printValues();
+
+        // Запись данных в файл
+        road.writeDataToFile("output.txt");
+        std::cout << "Данные успешно записаны в файл 'output.txt'." << std::endl;
     } catch(const std::exception& e) {
         std::cerr << "Ошибка: " << e.what() << std::endl;
         return 1;
