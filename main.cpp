@@ -5,16 +5,16 @@
 
 class Road {
 private:
-    std::size_t length; // Длина дороги в метрах
-    std::size_t lanes; // Количество полос на дороге
-    int quality; // Качество дороги (от 1 до 10)
+    std::size_t length = 0; // Длина дороги в метрах
+    std::size_t lanes = 0; // Количество полос на дороге
+    int quality = 0; // Качество дороги (от 1 до 10)
 
 public:
     // Конструктор с параметрами
     Road(std::size_t length, std::size_t lanes, int quality) : length(length), lanes(lanes), quality(quality) {}
 
     // Конструктор по умолчанию
-    Road() : length(0), lanes(0), quality(0) {}
+    Road() = default;
 
     // Метод для чтения данных из файла
     void readDataFromFile(const std::string& fileName) {
@@ -35,16 +35,16 @@ public:
             throw std::runtime_error("Не удалось открыть файл для записи: " + fileName);
         }
 
-        outputFile << "Длина дороги: " << length << " метров\n";
-        outputFile << "Количество полос: " << lanes << "\n";
-        outputFile << "Качество дороги: " << quality << "\n";
+        outputFile << "Длина дороги: " << length << " метров\n"
+                   << "Количество полос: " << lanes << "\n"
+                   << "Качество дороги: " << quality << "\n";
     }
 
     // Метод для вывода значений полей
     void printValues() const {
-        std::cout << "Длина дороги: " << length << " метров" << std::endl;
-        std::cout << "Количество полос: " << lanes << std::endl;
-        std::cout << "Качество дороги: " << quality << std::endl;
+        std::cout << "Длина дороги: " << length << " метров\n"
+                  << "Количество полос: " << lanes << "\n"
+                  << "Качество дороги: " << quality << "\n";
     }
 
     // Метод для обновления данных о дороге
@@ -55,17 +55,9 @@ public:
     }
 
     // Методы для получения значений длины, количества полос и качества дороги
-    std::size_t getLength() const {
-        return length;
-    }
-
-    std::size_t getLanes() const {
-        return lanes;
-    }
-
-    int getQuality() const {
-        return quality;
-    }
+    std::size_t getLength() const { return length; }
+    std::size_t getLanes() const { return lanes; }
+    int getQuality() const { return quality; }
 };
 
 int main() {
@@ -76,16 +68,11 @@ int main() {
         // Вывод значений полей
         road.printValues();
 
-        // Получение значений длины, количества полос и качества дороги
-        std::cout << "Длина дороги: " << road.getLength() << " метров" << std::endl;
-        std::cout << "Количество полос: " << road.getLanes() << std::endl;
-        std::cout << "Качество дороги: " << road.getQuality() << std::endl;
-
         // Запись данных в файл
         road.writeDataToFile("output.txt");
-        std::cout << "Данные успешно записаны в файл 'output.txt'." << std::endl;
+        std::cout << "Данные успешно записаны в файл 'output.txt'.\n";
     } catch(const std::exception& e) {
-        std::cerr << "Ошибка: " << e.what() << std::endl;
+        std::cerr << "Ошибка: " << e.what() << "\n";
         return 1;
     }
 
