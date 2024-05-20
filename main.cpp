@@ -49,6 +49,15 @@ public:
         length = newLength;
         lanes = newLanes;
     }
+
+    // Методы для получения значений длины и количества полос на дороге
+    std::size_t getLength() const {
+        return length;
+    }
+
+    std::size_t getLanes() const {
+        return lanes;
+    }
 };
 
 int main() {
@@ -58,6 +67,10 @@ int main() {
 
         // Вывод значений полей
         road.printValues();
+
+        // Получение значений длины и количества полос
+        std::cout << "Длина дороги: " << road.getLength() << " метров" << std::endl;
+        std::cout << "Количество полос: " << road.getLanes() << std::endl;
 
         // Запись данных в файл
         road.writeDataToFile("output.txt");
