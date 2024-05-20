@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <vector>
 #include <ctime>
 #include <cstdlib>
 
@@ -64,19 +65,19 @@ public:
         return timeInSeconds / 3600; // Переводим в часы
     }
 
-    // Метод для генерации случайной проблемы на дороге
-    void generateRoadProblem() const {
-        std::string problems[] = {
-            "Пробка из-за стада овец, которые перебегают дорогу.",
-            "Встречное движение заблокировано из-за пары енотов, играющих на дороге.",
-            "На дороге стоит старый автомобиль без колес, который тормозит движение.",
-            "Колония уток решила сделать перекресток своим гнездом.",
-            "Дорогу перекрыла семья енотов, устроивших пикник."
+    // Метод для предложения развлечений в пути
+    void suggestEntertainment() const {
+        std::vector<std::string> entertainmentOptions = {
+            "Послушать аудиокнигу",
+            "Включить любимый плейлист с музыкой",
+            "Прослушать интересный подкаст",
+            "Поиграть в автомобильные игры (например, 'Я-спрашиваю-ты-отвечаешь')"
         };
 
-        srand(time(0)); // Инициализируем генератор случайных чисел
-        int index = rand() % (sizeof(problems) / sizeof(problems[0])); // Получаем случайный индекс
-        std::cout << "На дороге возникла проблема: " << problems[index] << std::endl;
+        std::cout << "Предлагаемые развлечения в пути:\n";
+        for (const std::string& option : entertainmentOptions) {
+            std::cout << "- " << option << "\n";
+        }
     }
 };
 
@@ -102,24 +103,16 @@ int main() {
         double travelTime = road.calculateTravelTime(averageSpeed);
         std::cout << "Примерное время проезда по дороге: " << travelTime << " часа\n";
 
-        // Генерация случайной проблемы на дороге
-        road.generateRoadProblem();
+        // Предложение развлечений в пути
+        road.suggestEntertainment();
 
-        // Запись данных 
-в файл
-road.writeDataToFile("output.txt");
-std::cout << "Данные успешно записаны в файл 'output.txt'.\n";
-} catch(const std::exception& e) {
-std::cerr << "Ошибка: " << e.what() << "\n";
-return 1;
+        // Запись данных в файл
+        road.writeDataToFile("output.txt");
+        std::cout << "Данные успешно записаны в файл 'output.txt'.\n";
+    } catch(const std::exception& e) {
+        std::cerr << "Ошибка: " << e.what() << "\n";
+        return 1;
+    }
+
+    return 0;
 }
-return 0;
-}
-
-
-
-
-
-
-
-
