@@ -61,6 +61,17 @@ public:
         double timeInSeconds = length / (averageSpeed * lanes);
         return timeInSeconds / 3600; // Переводим в часы
     }
+
+    // Метод для шуток о качестве дороги
+    void jokeAboutRoadQuality() const {
+        if (quality >= 8) {
+            std::cout << "Качество этой дороги так высоко, что даже у машин начинают расти крылья!\n";
+        } else if (quality >= 6) {
+            std::cout << "На этой дороге иногда можно увидеть зайцев, которые обгоняют автомобили!\n";
+        } else {
+            std::cout << "Дорога так плоха, что здесь даже улитки предпочитают пользоваться автобусом!\n";
+        }
+    }
 };
 
 int main() {
@@ -84,6 +95,9 @@ int main() {
         double averageSpeed = 60; // Средняя скорость в км/ч
         double travelTime = road.calculateTravelTime(averageSpeed);
         std::cout << "Примерное время проезда по дороге: " << travelTime << " часа\n";
+
+        // Шутки о качестве дороги
+        road.jokeAboutRoadQuality();
 
         // Запись данных в файл
         road.writeDataToFile("output.txt");
